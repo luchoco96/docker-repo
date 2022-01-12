@@ -1,0 +1,48 @@
+version: "3.3"
+
+secrets:
+  DB_ROOT_PWD:
+    file: ./persistent/secrets/db_root_pwd.txt
+  MYSQL_PASSWORD:
+    file: ./persistent/secrets/mysql_pwd.txt
+
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # Public HTTP Port:
+      - '8081:80'
+      # Public HTTPS Port:
+      - '4443:443'
+      # Admin Web Port:
+      - '181:81'
+    environment:
+      # These are the settings to access your db
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD_FILE: /root/MYSQL_PASSWORD
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - ./persistent/data:/data
+      - ./persistent/letsencrypt:/etc/letsencrypt
+    secrets:
+      - MYSQL_PASSWORD
+    depends_on:
+      - db
+  db:
+    image: jc21/mariadb-aria
+    restart: unless-stopped
+    environment:
+      # MYSQL_ROOT_PASSWORD: "npm"  # use secret instead
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/DB_ROOT_PWD
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: "npm"
+      # MYSQL_PASSWORD: "npm"  # use secret instead
+      MYSQL_PASSWORD_FILE: /run/secrets/MYSQL_PASSWORD
+    volumes:
+      - ./persistent/data/mysql:/var/lib/mysql
+    secrets:
+      - DB_ROOT_PWD
+      - MYSQL_PASSWORD
