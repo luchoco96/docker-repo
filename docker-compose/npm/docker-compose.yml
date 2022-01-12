@@ -22,7 +22,7 @@ services:
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: "npm"
-      DB_MYSQL_PASSWORD_FILE: /root/MYSQL_PASSWORD
+      DB_MYSQL_PASSWORD_FILE: /run/secrets/MYSQL_PASSWORD
       DB_MYSQL_NAME: "npm"
     volumes:
       - ./persistent/data:/data
