@@ -4,3 +4,4 @@ Repo donde subo algunos docker compose que he probado, modificado del original y
 Listo más transparente lo que voy subiendo
 * [Nginx Proxy Manager](https://github.com/luchoco96/repo/tree/master/docker-compose/npm)
 * [Wordpress](https://github.com/luchoco96/repo/tree/master/docker-compose/wordpress)
+* [Jenkins](https://github.com/luchoco96/repo/tree/master/docker-compose/jenkins)
