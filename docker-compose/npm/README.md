@@ -5,7 +5,10 @@ Es multiusuario, por ende puedes generar x cantidad de usuarios para llevar una 
 
 En mi opinion sirve localmente para una infra hogareña, creo que para algo más productivo en una empresa de IT es necesario hacer pruebas de stress, seguridad, etc para ver realmente que tan seguro puede ser  usarlo en un ambiente productivo. 
 
-Se actualiza bastante y al parecer hay muchas personas que lo usan, en unos años seguro sea un producto bastante robusto que puede sorprender :)
+Las imagenes del docker hub se actualiza bastante y al parecer hay muchas personas que lo usan, en unos años seguro sea un producto bastante robusto que puede sorprender :)
 
 Enlace github del proyecto
 * https://github.com/NginxProxyManager/nginx-proxy-manager
+
+Comunidad en reddit
+* https://www.reddit.com/r/nginxproxymanager/
