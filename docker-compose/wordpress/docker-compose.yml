@@ -1,0 +1,34 @@
+version: "3.3"
+
+secrets:
+  DB_ROOT_PASSWORD:
+    file: ./persistent/secrets/db_root_pwd.txt
+  MYSQL_PASSWORD:
+    file: ./persistent/secrets/mysql_pwd.txt
+
+services:
+  app:
+    depends_on:
+      - db
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "8081:80"
+    env_file:
+      - .env
+    volumes:
+        - ./persistent/var/www/html:/var/www/html
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/DB_ROOT_PASSWORD
+
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD_FILE: /run/secrets/MYSQL_PASSWORD
+    volumes:
+      - ./persistent/var/lib/mysql:/var/lib/mysql
+    secrets:
+        - DB_ROOT_PASSWORD
+        - MYSQL_PASSWORD
